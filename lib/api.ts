@@ -43,6 +43,7 @@ export async function fetchNotes({
 }
 
 
+
 export async function createNote(
   note: Omit<Note, 'id' | 'createdAt' | 'updatedAt'>
 ): Promise<Note> {
@@ -53,4 +54,9 @@ export async function createNote(
 export async function deleteNote(noteId: string): Promise<Note> {
   const response = await client.delete<Note>(`/notes/${noteId}`);
   return response.data;
+}
+
+export async function fetchNoteById(id: string): Promise<Note> {
+  const { data } = await client.get<Note>(`/notes/${id}`);
+  return data;
 }
